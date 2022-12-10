@@ -1,9 +1,16 @@
-import requests
+
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+
+import functools
 import json
+import logging
 import os
 import sys
 import time
-import logging
+import warnings
+import binascii
 
 try:
     from urllib.error import HTTPError
@@ -35,9 +42,6 @@ def request(identifier, namespace='cid', domain='compound', operation=None, outp
     else:
         text_types = basestring
         
-    if identifier:
-        raise ValueError('identifier/cid cannnot be none')
-    #If identifier is a list, please join with comma into string
     try:
         if isinstance(identifier, int):
             identifier = str(identifier)
